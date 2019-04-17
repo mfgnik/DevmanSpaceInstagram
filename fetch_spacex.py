@@ -4,12 +4,11 @@ from fetch_image import fetch_image
 
 
 def get_photos_links_of_last_launch_from_spacex():
-    req = requests.get('https://api.spacexdata.com/v3/launches/past')
-    launches_list = json.loads(req.text)
-    number_of_launch = 0
-    while not launches_list[number_of_launch]['links']['flickr_images']:
-        number_of_launch += 1
-    return launches_list[number_of_launch]['links']['flickr_images']
+    response = requests.get('https://api.spacexdata.com/v3/launches/past')
+    launches_list = response.json()
+    for launch in launches_list:
+        if launch['links']['flickr_images']:
+            return launch
 
 
 def fetch_spacex_last_launch(directory):

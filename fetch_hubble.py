@@ -8,13 +8,13 @@ def get_extension(path):
 
 
 def fetch_image_from_hubble(directory, photo_id):
-    req = requests.get('http://hubblesite.org/api/v3/image/{}'.format(photo_id))
-    url = json.loads(req.text)['image_files'][-1]['file_url']
+    response = requests.get('http://hubblesite.org/api/v3/image/{}'.format(photo_id))
+    url = response.json()['image_files'][-1]['file_url']
     fetch_image(directory, 'hubble{}.{}'.format(photo_id, get_extension(url)), url)
 
 
 def fetch_collection_from_hubble(directory, collection):
-    req = requests.get('http://hubblesite.org/api/v3/images/{}'.format(collection))
-    for photo in json.loads(req.text):
+    response = requests.get('http://hubblesite.org/api/v3/images/{}'.format(collection))
+    for photo in response.json():
         photo_id = photo['id']
         fetch_image_from_hubble(directory, photo_id)

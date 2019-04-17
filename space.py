@@ -6,7 +6,6 @@ from fetch_spacex import fetch_spacex_last_launch
 
 
 def post_photos():
-    dotenv.load_dotenv()
     bot = instabot.Bot()
     bot.login(username=os.getenv('login'), password=os.getenv('password'))
     directory = 'images'
@@ -22,6 +21,5 @@ def post_photos():
 
 
 if __name__ is '__main__':
+    dotenv.load_dotenv()
     post_photos()
-
-post_photos()

@@ -1,6 +1,7 @@
 .env
 *.pyc
 *.txt
+!requirements.txt
 *.checkpoint
 *.log
 images
